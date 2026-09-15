@@ -1,5 +1,3 @@
-import io
-
 from eth import EthInterpreter
 
 
@@ -12,7 +10,7 @@ def run(source, answers=None):
 
 
 def test_print_and_arithmetic():
-    assert run('x = 10\ny = 20\nአሳይ x + y') == [30]
+    assert run('x = 10\ny = 20\nአሳይ x + y * 2') == [50]
 
 
 def test_string_concatenation():
@@ -30,3 +28,18 @@ def test_repeat():
 
 def test_input_expression():
     assert run('ስም = ጠይቅ("ስምህ?")\nአሳይ "ሰላም " + ስም', ["ሱራፌል"]) == ["ሰላም ሱራፌል"]
+
+
+def test_lists_and_indexing():
+    assert run('ቁጥሮች = [10, 20, 30]\nአሳይ ቁጥሮች[1]') == [20]
+
+
+def test_functions_and_return():
+    source = '''ተግባር ደምር(a, b):
+    መልስ a + b
+አሳይ ደምር(2, 5)'''
+    assert run(source) == [7]
+
+
+def test_boolean_keywords():
+    assert run('x = 4\nከሆነ x > 2 እና x < 10:\n    አሳይ "እሺ"') == ["እሺ"]

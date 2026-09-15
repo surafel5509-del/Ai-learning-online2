@@ -1,19 +1,27 @@
 # Eth 🇪🇹
 
-**Eth** is an Amharic-first programming language prototype. The first version is an interpreter written in Python and uses `.eth` source files.
+**Eth** is an Amharic-first programming language built to be easy for beginners. Eth source is UTF-8 `.eth` text and the interpreter is written in Python.
 
-## What works in v0.1
+## Eth v0.2
+
+The interpreter now has a real language pipeline:
+
+`source → Lexer → Parser → AST → Interpreter`
+
+### Language features
 
 - `አሳይ` — print values
 - variables with `=`
-- strings, integers, floats, booleans
-- `+ - * / // % **`
+- strings, integers, floats and booleans (`እውነት` / `ሐሰት`)
+- arithmetic: `+ - * / // %`
 - comparisons: `== != < <= > >=`
+- boolean operators: `እና` / `ወይም`
 - `ከሆነ` / `ካልሆነ` — if / else
 - `ድገም` — repeat loops
 - `ጠይቅ(...)` — user input
-- UTF-8 Amharic identifiers and source files
-- Amharic error messages for common language errors
+- `ተግባር` / `መልስ` — functions and return values
+- lists and indexing: `[10, 20, 30]`, `ቁጥሮች[1]`
+- Amharic identifiers and Amharic error messages
 
 ## Run Eth
 
@@ -23,37 +31,20 @@ Python 3.10+ is recommended.
 python eth.py examples/hello.eth
 ```
 
-Expected output:
+## Example: functions and lists
 
 ```text
-ሰላም ሱራፌል
-30
-x ከ y ያነሰ ነው
-Eth!
-Eth!
-Eth!
+ተግባር ደምር(a, b):
+    መልስ a + b
+
+ቁጥሮች = [10, 20, 30]
+አሳይ ደምር(ቁጥሮች[0], 5)
 ```
 
-## Write your first Eth program
-
-Create `hello.eth`:
+Output:
 
 ```text
-ስም = "ሱራፌል"
-ዕድሜ = 20
-
-አሳይ "ሰላም " + ስም
-
-ከሆነ ዕድሜ >= 18:
-    አሳይ "አዋቂ ነህ"
-ካልሆነ:
-    አሳይ "ገና ልጅ ነህ"
-```
-
-Then run:
-
-```bash
-python eth.py hello.eth
+15
 ```
 
 ## Input
@@ -63,25 +54,24 @@ python eth.py hello.eth
 አሳይ "ሰላም " + ስም
 ```
 
-## Project direction
-
-The interpreter is intentionally small and dependency-free. The next milestones are:
-
-1. functions (`ተግባር` / `መልስ`)
-2. lists and dictionaries
-3. modules and a standard library
-4. a proper lexer/parser and AST instead of the current expression bridge
-5. `eth` command-line executable
-6. editor syntax highlighting and diagnostics
-7. an AI assistant that explains and repairs Eth code
-8. a self-hosting/compiler track after the language semantics stabilize
-
 ## Development
 
-Tests use `pytest`:
+Run the tests with:
 
 ```bash
 pytest -q
 ```
 
-Eth source files are UTF-8 encoded.
+GitHub Actions also runs the test suite and the example program on pushes and pull requests.
+
+## Roadmap
+
+1. dictionaries and richer list operations
+2. modules and a standard library
+3. better diagnostics with source locations
+4. `eth` executable and interactive REPL
+5. editor syntax highlighting and diagnostics
+6. AI assistant for explaining and repairing Eth code
+7. compiler/self-hosting track after the language semantics stabilize
+
+Eth is intentionally small right now: the goal is to make the language semantics clear before adding a large standard library or compiler.
